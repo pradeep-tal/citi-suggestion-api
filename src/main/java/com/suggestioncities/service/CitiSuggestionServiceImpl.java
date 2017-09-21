@@ -12,23 +12,28 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 import org.apache.commons.lang.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import com.suggestioncities.dao.AutoSuggestionDAO;
 import com.suggestioncities.exception.FileClosingException;
 import com.suggestioncities.model.Response;
 
+@Component
 public class CitiSuggestionServiceImpl implements CitiSuggestionService {
 
 	private static Logger logger = Logger.getLogger(CitiSuggestionServiceImpl.class.getName());
 
+	@Autowired
+	AutoSuggestionDAO autoSuggestionDAO;
+
 	// @Value("${citidata.path}")
 	private static final String path = "/home/pradeepr/Downloads/All_India_pincode_data_18082017.csv";
-	
+
 	@Override
 	public String getMatchedCities(String start, int maxSugg) throws Exception {
-		AutoSuggestionDAO autoSuggestionDAO = new AutoSuggestionDAO();
 		List<String> cities = autoSuggestionDAO.getCities(start, maxSugg);
-		
+
 		if (cities.size() > 0)
 			return StringUtils.join(cities, System.getProperty("line.separator"));
 		else
@@ -41,8 +46,6 @@ public class CitiSuggestionServiceImpl implements CitiSuggestionService {
 		Set<String> uniqueCities = new HashSet<String>();
 
 		uniqueCities = readAddressFromFile();
-
-		AutoSuggestionDAO autoSuggestionDAO = new AutoSuggestionDAO();
 
 		autoSuggestionDAO.loadCities(uniqueCities);
 

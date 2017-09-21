@@ -1,15 +1,18 @@
 package com.suggestioncities;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.suggestioncities.model.Response;
 import com.suggestioncities.service.CitiSuggestionService;
-import com.suggestioncities.service.CitiSuggestionServiceImpl;
 
 @RestController
 public class CitiSuggestionController {
+	
+	@Autowired
+	CitiSuggestionService citiSuggestionService;
 
 	@RequestMapping("/suggest_cities")
 	public Object getMatchedCities(@RequestParam("start") String start, @RequestParam("atmost") int atmost) {
@@ -21,9 +24,6 @@ public class CitiSuggestionController {
 		} else if (atmost <= 0) {
 			return new Response("Error", "Invalid value for atmost");
 		} else {
-
-			CitiSuggestionService citiSuggestionService = new CitiSuggestionServiceImpl();
-
 			try {
 				return citiSuggestionService.getMatchedCities(start, atmost);
 			} catch (Exception e) {
@@ -35,7 +35,6 @@ public class CitiSuggestionController {
 
 	@RequestMapping("/load_cities")
 	public String refreshCities() {
-		CitiSuggestionService citiSuggestionService = new CitiSuggestionServiceImpl();
 		try {
 			citiSuggestionService.loadCities();
 

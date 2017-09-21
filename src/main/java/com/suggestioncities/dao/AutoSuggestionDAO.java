@@ -11,6 +11,9 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class AutoSuggestionDAO {
 
 	private static Logger logger = Logger.getLogger(AutoSuggestionDAO.class.getName());
