@@ -11,7 +11,6 @@ import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -35,7 +34,7 @@ public class CitiSuggestionServiceImpl implements CitiSuggestionService {
 		List<String> cities = autoSuggestionDAO.getCities(start, maxSugg);
 
 		if (cities.size() > 0)
-			return StringUtils.join(cities, System.getProperty("line.separator"));
+			return org.apache.commons.lang3.StringUtils.join(cities, System.getProperty("line.separator"));
 		else
 			return new Response("Success", "No Suggestions found").toString();
 	}

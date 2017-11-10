@@ -3,7 +3,6 @@ package com.test;
 import java.util.Arrays;
 import java.util.List;
 
-import org.apache.commons.lang.StringUtils;
 
 public class StringJoinerTest {
 
@@ -19,7 +18,7 @@ public class StringJoinerTest {
 
 		System.out.println(System.getProperty("line.separator"));
 		
-		System.out.println(StringUtils.join(l, System.getProperty("line.separator")));
+		System.out.println(org.apache.commons.lang3.StringUtils.join(l, System.getProperty("line.separator")));
 	}
 
 }
