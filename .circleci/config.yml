@@ -1,8 +1,12 @@
 version: 2
 jobs:
-   build:
-     docker:
-       - image: circleci/openjdk:8-jdk
-     steps:
-       - checkout
-       - run: echo "hello world"
+ build:
+   machine: true
+   steps:
+     - checkout
+
+     # build the application image
+     - run: docker build -t pd/app:citiapi .
+
+     # deploy the image
+     #- run: docker push company/app:$CIRCLE_BRANCH
