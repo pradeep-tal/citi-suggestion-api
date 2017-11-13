@@ -5,8 +5,8 @@ jobs:
    steps:
      - checkout
 
-      - run: |
-         docker login -u pradeepdyapa@gmail.com -p docker123
+     - run: |
+         docker login -u 8408 -p docker123
 
      # build the application image
      - run: docker build -t pd/app:citiapi .
