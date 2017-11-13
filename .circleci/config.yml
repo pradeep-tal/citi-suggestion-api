@@ -5,8 +5,9 @@ jobs:
    steps:
      - checkout
 
-     - run: |
-         docker login -u 8408 -p docker123
+     - run: mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
+ 
+     - run: docker login -u 8408 -p docker123
 
      # build the application image
      - run: docker build -t pd/app:citiapi .
