@@ -10,7 +10,7 @@ jobs:
      - run: docker login -u 8408 -p docker123
 
      # build the application image
-     - run: docker build -t pd/app:citiapi .
+     - run: docker build -t 8408/pd:citiapi .
 
      # deploy the image
-     - run: docker push pd/app:citiapi
+     - run: docker push 8408/pd:citiapi
