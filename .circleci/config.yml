@@ -8,9 +8,18 @@ jobs:
    steps:
     
      - run:
+        
         name: git clone priavte project
-        command: git clone https://github.com/pradeep-tal/CitiDependent.git
-     
+        command: | 
+
+           cd ~
+
+           git clone https://github.com/pradeep-tal/CitiDependent.git
+
+	   cd CitiDependent
+
+           mvn -DskipTests clean install 
+   
      - checkout
 
      - restore_cache:
