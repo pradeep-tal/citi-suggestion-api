@@ -1,43 +1,36 @@
-version: 2
-jobs:
- build:
-   machine: true
-
-   working_directory: ~/repo
-  
-   steps:
-    
-     - run:
-        
-        name: git clone priavte project
-        
-        command: |
-           cd ~
-           git clone https://github.com/pradeep-tal/CitiDependent.git
-	   cd CitiDependent
-           mvn -DskipTests clean install
-     - checkout
-
-     - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "pom.xml" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-     - run: 
-       
-        name: maven build 
-        command: mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline
-       
-     - save_cache:
-          paths:
+jobs: 
+  build: 
+    machine: true
+    steps: 
+      - 
+        run: 
+          command: |
+              cd ~
+              git clone https://github.com/pradeep-tal/CitiDependent.git
+              cd CitiDependent
+              mvn -DskipTests clean install
+          name: "git clone priavte project"
+      - checkout
+      - 
+        restore_cache: 
+          keys: 
+            - "v1-dependencies-{{ checksum \"pom.xml\" }}"
+            - v1-dependencies-
+      - 
+        run: 
+          command: "mvn -DskipTests clean install dependency:resolve-plugins dependency:go-offline"
+          name: "maven build"
+      - 
+        save_cache: 
+          key: "v1-dependencies-{{ checksum \"pom.xml\" }}"
+          paths: 
             - ~/.m2
-          key: v1-dependencies-{{ checksum "pom.xml" }}
-     
-     - run: docker login -u 8408 -p docker123
+      - 
+        run: "docker login -u 8408 -p docker123"
+      - 
+        run: "docker build -t 8408/pd:citiapi ."
+      - 
+        run: "docker push 8408/pd:citiapi"
+    working_directory: ~/repo
+version: 2
 
-     # build the application image
-     - run: docker build -t 8408/pd:citiapi .
-
-     # deploy the image
-     - run: docker push 8408/pd:citiapi
