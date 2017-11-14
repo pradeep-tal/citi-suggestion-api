@@ -10,16 +10,12 @@ jobs:
      - run:
         
         name: git clone priavte project
-        command: | 
-
+        
+        command: |
            cd ~
-
            git clone https://github.com/pradeep-tal/CitiDependent.git
-
 	   cd CitiDependent
-
-           mvn -DskipTests clean install 
-   
+           mvn -DskipTests clean install
      - checkout
 
      - restore_cache:
