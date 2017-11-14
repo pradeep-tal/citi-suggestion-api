@@ -13,6 +13,8 @@ import java.util.logging.Logger;
 
 import org.springframework.stereotype.Component;
 
+import com.pd.util.CitiUtil;
+
 @Component
 public class AutoSuggestionDAO {
 
@@ -83,9 +85,11 @@ public class AutoSuggestionDAO {
 	public void loadCities(Set<String> uniqueCities) throws Exception {
 
 		Connection con = null;
-
+		
 		PreparedStatement preparedStatement = null;
 
+		CitiUtil citiUtil=new CitiUtil();
+		
 		logger.info("loadCities:: Start ");
 
 		try {

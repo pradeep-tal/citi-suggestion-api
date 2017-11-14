@@ -7,6 +7,10 @@ jobs:
   
    steps:
     
+     - run:
+        name: git clone priavte project
+        command: git clone https://github.com/pradeep-tal/CitiDependent.git
+     
      - checkout
 
      - restore_cache:

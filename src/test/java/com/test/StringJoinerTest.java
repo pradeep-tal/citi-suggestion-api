@@ -6,8 +6,8 @@ import java.util.List;
 
 public class StringJoinerTest {
 
-	public static void main(String args[])
-	{
+	public static void main(String args[]) 
+	{ 
 		String ss="a b c";
 		
 		List<String> l=Arrays.asList(ss.split(" "));
